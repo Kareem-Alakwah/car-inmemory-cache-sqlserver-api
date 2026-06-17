@@ -1,0 +1,25 @@
+@CarCacheApi_HostAddress = http://localhost:5278
+
+### Get all cars (Initial load - MISS, subsequent - HIT)
+GET {{CarCacheApi_HostAddress}}/api/cars
+Accept: application/json
+
+### Get cars filtered by Year, Make, Model
+GET {{CarCacheApi_HostAddress}}/api/cars?years=2020&makes=Toyota
+Accept: application/json
+
+### Create a new car (Triggers cache invalidation)
+POST {{CarCacheApi_HostAddress}}/api/cars
+Content-Type: application/json
+
+{
+  "make": "Toyota",
+  "model": "Yaris",
+  "year": 2020,
+  "price": 18000.00,
+  "color": "Red"
+}
+
+### Get cars by ID
+GET {{CarCacheApi_HostAddress}}/api/cars/1
+Accept: application/json
